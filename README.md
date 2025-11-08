@@ -4,6 +4,10 @@ Effortlessly produce structured JIRA bug reports with a single click. This Chrom
 
 > Looking for the Traditional Chinese guide? See [README.zh-TW.md](README.zh-TW.md).
 
+## Demo
+
+- [Product walkthrough video](https://github.com/user-attachments/assets/68f6e35e-d6c6-4567-bbcd-c9add8f2741d)
+
 ## Features
 
 - **One-click template injection** – Populate the JIRA description field with a curated bug report template right from the side panel.

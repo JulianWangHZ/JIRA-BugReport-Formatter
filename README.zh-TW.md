@@ -4,6 +4,10 @@ JIRA Bug Report Formatter 是一款 Chrome 擴充功能，協助團隊以一致�
 
 > 想閱讀英文版說明？請參考 [README.md](README.md)。
 
+## 示範影片
+
+- [產品導覽影片](https://github.com/user-attachments/assets/68f6e35e-d6c6-4567-bbcd-c9add8f2741d)
+
 ## 功能亮點
 
 - **一鍵套用模板**：在 JIRA 票單頁面點擊「套用 Bug Report 模板」，立即填入客製化的 HTML 段落與提示文字。
