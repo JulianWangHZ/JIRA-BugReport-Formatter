@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="growth.png" class="icon" alt="">
+      <h3 class="title">JIRA Bug Report Formatter</h3>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="tab-navigation">
+      <button class="tab-button active" data-tab="quick">快速套用</button>
+      <button class="tab-button" data-tab="settings">設定</button>
+    </div>
+
+    <!-- Main Tab Content -->
+    <div id="quick-tab" class="tab-content active">
+      <div id="status" class="status"></div>
+
+      <button id="insertTemplateBtn" class="button">套用模板</button>
+    </div>
+
+    <!-- Settings Tab Content -->
+    <div id="settings-tab" class="tab-content">
+      <div class="input-group">
+        <label for="jiraDomains">JIRA 網域（每行一個）：</label>
+        <textarea id="jiraDomains" placeholder="*.example.atlassian.net" rows="4"></textarea>
+      </div>
+
+      <div class="input-group">
+        <label for="blacklistDomains">封鎖網域（每行一個）：</label>
+        <textarea id="blacklistDomains" placeholder="*/wiki/*" rows="4"></textarea>
+      </div>
+
+      <div class="input-group">
+        <label for="descriptionTemplate">描述模板（HTML 格式）：</label>
+        <textarea id="descriptionTemplate"
+          placeholder="請輸入描述模板內容"
+          rows="10"></textarea>
+      </div>
+
+      <div id="settings-status" class="status"></div>
+
+      <button id="saveSettingsBtn" class="button">儲存設定</button>
+    </div>
+  </div>
+
+  <script src="constants.js"></script>
+  <script src="sidepanel.js"></script>
+</body>
+
+</html>

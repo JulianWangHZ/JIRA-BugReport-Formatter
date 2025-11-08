@@ -1,0 +1,228 @@
+body {
+  width: 100%;
+  min-height: 100vh;
+  padding: 16px;
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f8f9fa;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  max-width: none;
+  background: white;
+  border-radius: 8px;
+  padding: 16px 16px 24px 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #333;
+  font-size: 18px;
+}
+
+.input-group {
+  margin-bottom: 12px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #333;
+  font-size: 13px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 13px;
+}
+
+/* Checkbox specific styles */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #FF6FB1;
+  border-color: #FF6FB1;
+  position: relative;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: white;
+  font-size: 10px;
+  position: absolute;
+  left: 1px;
+}
+
+.button {
+  background: #FF6FB1;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  box-sizing: border-box;
+}
+
+.button:hover {
+  background: #FF6FB1;
+}
+
+.button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.status {
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  display: none;
+  font-size: 12px;
+  word-wrap: break-word;
+}
+
+.status.success {
+  background: #e6f7e6;
+  color: #006600;
+  border: 1px solid #b3d9b3;
+}
+
+.status.error {
+  background: #ffe6e6;
+  color: #cc0000;
+  border: 1px solid #ffb3b3;
+}
+
+/* Tab Navigation Styles */
+.tab-navigation {
+  display: flex;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.tab-button:hover {
+  color: #FF6FB1;
+  background: rgba(255, 111, 177, 0.1);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.tab-button.active {
+  color: #FF6FB1;
+  border-bottom-color: #FF6FB1;
+  background: none;
+  font-weight: 700;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Tab Content Styles */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Textarea Styles */
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 12px;
+  font-family: monospace;
+  resize: vertical;
+  line-height: 1.4;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #FF6FB1;
+  box-shadow: 0 0 0 2px rgba(255, 111, 177, 0.1);
+}
+
+/* Select Styles */
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: #FF6FB1;
+  box-shadow: 0 0 0 2px rgba(255, 111, 177, 0.1);
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #FF6FB1;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+}
+

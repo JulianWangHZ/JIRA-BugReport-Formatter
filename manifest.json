@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "JIRA Bug Report Formatter",
+  "version": "1.0.0",
+  "description": "Streamline JIRA bug reporting by auto-inserting structured templates",
+  "permissions": [
+    "storage",
+    "sidePanel",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.atlassian.net/*",
+    "*://*.jira.com/*",
+    "*://*/jira/*"
+  ],
+  "action": {
+    "default_title": "JIRA Bug Report Formatter",
+    "default_icon": {
+      "16": "growth.png",
+      "32": "growth.png",
+      "48": "growth.png",
+      "128": "growth.png"
+    }
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "icons": {
+    "16": "growth.png",
+    "32": "growth.png",
+    "48": "growth.png",
+    "128": "growth.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "constants.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
