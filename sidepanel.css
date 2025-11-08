@@ -226,3 +226,80 @@ select:focus {
   white-space: nowrap;
 }
 
+.language-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.language-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  flex-shrink: 0;
+}
+
+.language-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 128px;
+  height: 32px;
+  background: #f0f2f5;
+  border-radius: 20px;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.language-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  width: calc(50% - 4px);
+  background: #FF6FB1;
+  border-radius: 14px;
+  transition: transform 0.2s ease;
+}
+
+.slider-label {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  z-index: 1;
+  color: #666;
+}
+
+.language-switch input:not(:checked) + .slider .slider-label-zh,
+.language-switch input:checked + .slider .slider-label-en {
+  color: white;
+}
+
+.language-switch input:checked + .slider::before {
+  transform: translateX(calc(100% + 4px));
+}
+

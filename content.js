@@ -47,8 +47,24 @@ const DESCRIPTION_FIELD_SELECTORS = [
 
 async function insertTemplateManually() {
   try {
-    const result = await chrome.storage.sync.get(['descriptionTemplate']);
-    const descriptionTemplate = result.descriptionTemplate || DEFAULTS.DESCRIPTION_TEMPLATE;
+    const result = await chrome.storage.sync.get([
+      'descriptionTemplate',
+      'descriptionTemplates',
+      'language'
+    ]);
+    const supportedLanguages = Array.isArray(SUPPORTED_LANGUAGES) && SUPPORTED_LANGUAGES.length > 0
+      ? SUPPORTED_LANGUAGES
+      : [DEFAULT_LANGUAGE];
+    const activeLanguage = supportedLanguages.includes(result.language)
+      ? result.language
+      : DEFAULT_LANGUAGE;
+    const descriptionTemplates = result.descriptionTemplates || {};
+    const descriptionTemplate =
+      (typeof descriptionTemplates[activeLanguage] === 'string' && descriptionTemplates[activeLanguage].trim().length > 0
+        ? descriptionTemplates[activeLanguage]
+        : result.descriptionTemplate) ||
+      (DEFAULT_TEMPLATES && DEFAULT_TEMPLATES[activeLanguage]) ||
+      DEFAULTS.DESCRIPTION_TEMPLATE;
 
     const success = await insertTemplateIntoField(descriptionTemplate);
 

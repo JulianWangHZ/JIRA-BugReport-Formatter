@@ -10,44 +10,56 @@
   <div class="container">
     <div class="header">
       <img src="growth.png" class="icon" alt="">
-      <h3 class="title">JIRA Bug Report Formatter</h3>
+      <h3 class="title" data-i18n="appTitle">JIRA Bug Report Formatter</h3>
+    </div>
+
+    <div class="language-toggle">
+      <span class="language-label" data-i18n="labels.language">介面語言</span>
+      <label class="language-switch">
+        <input type="checkbox" id="languageToggle" aria-label="language toggle">
+        <span class="slider">
+          <span class="slider-label slider-label-zh" data-i18n="toggle.zh">繁中</span>
+          <span class="slider-label slider-label-en" data-i18n="toggle.en">English</span>
+        </span>
+      </label>
     </div>
 
     <!-- Tab Navigation -->
     <div class="tab-navigation">
-      <button class="tab-button active" data-tab="quick">快速套用</button>
-      <button class="tab-button" data-tab="settings">設定</button>
+      <button class="tab-button active" data-tab="quick" data-i18n="tabQuick">快速套用</button>
+      <button class="tab-button" data-tab="settings" data-i18n="tabSettings">設定</button>
     </div>
 
     <!-- Main Tab Content -->
     <div id="quick-tab" class="tab-content active">
       <div id="status" class="status"></div>
 
-      <button id="insertTemplateBtn" class="button">套用模板</button>
+      <button id="insertTemplateBtn" class="button" data-i18n="buttons.insertTemplate">套用模板</button>
     </div>
 
     <!-- Settings Tab Content -->
     <div id="settings-tab" class="tab-content">
       <div class="input-group">
-        <label for="jiraDomains">JIRA 網域（每行一個）：</label>
-        <textarea id="jiraDomains" placeholder="*.example.atlassian.net" rows="4"></textarea>
+        <label for="jiraDomains" data-i18n="labels.jiraDomains">JIRA 網域（每行一個）：</label>
+        <textarea id="jiraDomains" data-i18n-placeholder="placeholders.jiraDomains" placeholder="*.example.atlassian.net" rows="4"></textarea>
       </div>
 
       <div class="input-group">
-        <label for="blacklistDomains">封鎖網域（每行一個）：</label>
-        <textarea id="blacklistDomains" placeholder="*/wiki/*" rows="4"></textarea>
+        <label for="blacklistDomains" data-i18n="labels.blacklistDomains">封鎖網域（每行一個）：</label>
+        <textarea id="blacklistDomains" data-i18n-placeholder="placeholders.blacklistDomains" placeholder="*/wiki/*" rows="4"></textarea>
       </div>
 
       <div class="input-group">
-        <label for="descriptionTemplate">描述模板（HTML 格式）：</label>
+        <label for="descriptionTemplate" data-i18n="labels.descriptionTemplate">描述模板（HTML 格式）：</label>
         <textarea id="descriptionTemplate"
+          data-i18n-placeholder="placeholders.descriptionTemplate"
           placeholder="請輸入描述模板內容"
           rows="10"></textarea>
       </div>
 
       <div id="settings-status" class="status"></div>
 
-      <button id="saveSettingsBtn" class="button">儲存設定</button>
+      <button id="saveSettingsBtn" class="button" data-i18n="buttons.saveSettings">儲存設定</button>
     </div>
   </div>
 

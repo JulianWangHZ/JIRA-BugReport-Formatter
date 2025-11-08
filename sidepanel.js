@@ -8,6 +8,105 @@ document.addEventListener('DOMContentLoaded', () => {
   const settingsStatus = document.getElementById('settings-status');
   const tabButtons = document.querySelectorAll('.tab-button');
   const tabContents = document.querySelectorAll('.tab-content');
+  const languageToggle = document.getElementById('languageToggle');
+
+  const supportedLanguages = Array.isArray(SUPPORTED_LANGUAGES) && SUPPORTED_LANGUAGES.length > 0
+    ? SUPPORTED_LANGUAGES
+    : [DEFAULT_LANGUAGE, 'en'];
+  const secondaryLanguage = supportedLanguages.find(lang => lang !== DEFAULT_LANGUAGE) || DEFAULT_LANGUAGE;
+
+  let currentLanguage = DEFAULT_LANGUAGE || DEFAULTS.LANGUAGE || 'zh-TW';
+  let descriptionTemplates = {};
+  let legacyDescriptionTemplate = '';
+
+  if (insertTemplateBtn) {
+    insertTemplateBtn.dataset.state = 'default';
+  }
+
+  if (saveSettingsBtn) {
+    saveSettingsBtn.dataset.state = 'default';
+  }
+
+  function getLocaleStrings(lang) {
+    if (I18N && I18N[lang]) {
+      return I18N[lang];
+    }
+    return I18N && I18N[DEFAULT_LANGUAGE] ? I18N[DEFAULT_LANGUAGE] : {};
+  }
+
+  function translate(key, lang = currentLanguage) {
+    const locale = getLocaleStrings(lang);
+    return key.split('.').reduce((acc, part) => {
+      if (acc && typeof acc === 'object' && part in acc) {
+        return acc[part];
+      }
+      return null;
+    }, locale) || key;
+  }
+
+  function applyTranslations(lang) {
+    const languageToApply = I18N && I18N[lang] ? lang : DEFAULT_LANGUAGE;
+    document.documentElement.lang = languageToApply;
+
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+      const key = element.getAttribute('data-i18n');
+      element.textContent = translate(key, languageToApply);
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+      const key = element.getAttribute('data-i18n-placeholder');
+      element.setAttribute('placeholder', translate(key, languageToApply));
+    });
+
+    if (insertTemplateBtn) {
+      const state = insertTemplateBtn.dataset.state || 'default';
+      const key = state === 'success' ? 'buttons.insertTemplateSuccess' : 'buttons.insertTemplate';
+      insertTemplateBtn.textContent = translate(key, languageToApply);
+    }
+
+    if (saveSettingsBtn) {
+      const state = saveSettingsBtn.dataset.state || 'default';
+      const key = state === 'success' ? 'buttons.saveSettingsSuccess' : 'buttons.saveSettings';
+      saveSettingsBtn.textContent = translate(key, languageToApply);
+    }
+
+    if (languageToggle) {
+      languageToggle.checked = languageToApply !== DEFAULT_LANGUAGE;
+      languageToggle.disabled = secondaryLanguage === DEFAULT_LANGUAGE;
+      languageToggle.setAttribute('aria-label', translate('labels.language', languageToApply));
+    }
+  }
+
+  function captureCurrentTemplate() {
+    if (!descriptionTemplateInput) {
+      return;
+    }
+    const value = descriptionTemplateInput.value;
+    descriptionTemplates = {
+      ...descriptionTemplates,
+      [currentLanguage]: value
+    };
+  }
+
+  function getTemplateForLanguage(lang) {
+    if (descriptionTemplates && typeof descriptionTemplates[lang] === 'string' && descriptionTemplates[lang].trim().length > 0) {
+      return descriptionTemplates[lang];
+    }
+    if (legacyDescriptionTemplate && legacyDescriptionTemplate.trim().length > 0) {
+      return legacyDescriptionTemplate;
+    }
+    if (DEFAULT_TEMPLATES && DEFAULT_TEMPLATES[lang]) {
+      return DEFAULT_TEMPLATES[lang];
+    }
+    return DEFAULTS.DESCRIPTION_TEMPLATE;
+  }
+
+  function updateTemplateInput(lang) {
+    if (!descriptionTemplateInput) {
+      return;
+    }
+    descriptionTemplateInput.value = getTemplateForLanguage(lang);
+  }
 
     function showStatus(message, isError = false, statusElement = status) {
         if (!statusElement) {
@@ -46,11 +145,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-    chrome.storage.sync.get([
+  chrome.storage.sync.get([
         'jiraDomains',
         'blacklistDomains',
-        'descriptionTemplate'
+        'descriptionTemplate',
+        'descriptionTemplates',
+        'language'
     ], (result) => {
+        const storedLanguage = result.language;
+        if (supportedLanguages.includes(storedLanguage)) {
+            currentLanguage = storedLanguage;
+        } else {
+            currentLanguage = DEFAULT_LANGUAGE;
+        }
+
+        applyTranslations(currentLanguage);
+
         if (jiraDomainsInput) {
             const domains = result.jiraDomains || DEFAULTS.JIRA_DOMAINS;
             jiraDomainsInput.value = domains.join('\n');
@@ -61,27 +171,41 @@ document.addEventListener('DOMContentLoaded', () => {
             blacklistDomainsInput.value = domains.join('\n');
         }
 
-        if (descriptionTemplateInput) {
-            const storedTemplate = result.descriptionTemplate;
-            const templateToUse = storedTemplate || DEFAULTS.DESCRIPTION_TEMPLATE;
+        descriptionTemplates = result.descriptionTemplates || {};
+        legacyDescriptionTemplate = result.descriptionTemplate || '';
 
-            descriptionTemplateInput.value = templateToUse;
-        }
+        updateTemplateInput(currentLanguage);
     });
+
+  if (languageToggle) {
+    languageToggle.addEventListener('change', () => {
+      captureCurrentTemplate();
+      const targetLanguage = languageToggle.checked ? secondaryLanguage : DEFAULT_LANGUAGE;
+      if (targetLanguage === currentLanguage) {
+        return;
+      }
+      currentLanguage = targetLanguage;
+      applyTranslations(currentLanguage);
+      updateTemplateInput(currentLanguage);
+      chrome.storage.sync.set({ language: currentLanguage }, () => {});
+    });
+  }
 
     if (saveSettingsBtn) {
         saveSettingsBtn.addEventListener('click', () => {
+      captureCurrentTemplate();
+
             const jiraDomainsText = jiraDomainsInput ? jiraDomainsInput.value.trim() : '';
             const blacklistDomainsText = blacklistDomainsInput ? blacklistDomainsInput.value.trim() : '';
             const descriptionTemplate = descriptionTemplateInput ? descriptionTemplateInput.value.trim() : '';
 
     if (!jiraDomainsText) {
-                showStatus('⚠️ 請至少輸入一個 JIRA 網域', true, settingsStatus);
+                showStatus(translate('status.saveMissingDomain'), true, settingsStatus);
       return;
     }
 
     if (!descriptionTemplate) {
-                showStatus('⚠️ 請輸入描述模板內容', true, settingsStatus);
+                showStatus(translate('status.saveMissingTemplate'), true, settingsStatus);
       return;
     }
 
@@ -96,19 +220,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const settings = {
                 jiraDomains,
                 blacklistDomains,
-                descriptionTemplate
+                language: currentLanguage
             };
 
+      const updatedTemplates = {
+        ...descriptionTemplates,
+        [currentLanguage]: descriptionTemplate
+      };
+
+      settings.descriptionTemplates = updatedTemplates;
+      settings.descriptionTemplate = descriptionTemplate;
+      descriptionTemplates = updatedTemplates;
+
             chrome.storage.sync.set(settings, () => {
-      const originalText = saveSettingsBtn.textContent;
       const originalBgColor = saveSettingsBtn.style.backgroundColor;
 
-                saveSettingsBtn.textContent = '設定已儲存！';
+                saveSettingsBtn.dataset.state = 'success';
+                saveSettingsBtn.textContent = translate('buttons.saveSettingsSuccess');
       saveSettingsBtn.style.backgroundColor = '#28a745';
       saveSettingsBtn.disabled = true;
 
       setTimeout(() => {
-        saveSettingsBtn.textContent = originalText;
+        saveSettingsBtn.dataset.state = 'default';
+        saveSettingsBtn.textContent = translate('buttons.saveSettings');
         saveSettingsBtn.style.backgroundColor = originalBgColor;
         saveSettingsBtn.disabled = false;
       }, 3000);
@@ -119,8 +253,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (insertTemplateBtn) {
         insertTemplateBtn.addEventListener('click', async () => {
             insertTemplateBtn.disabled = true;
-            const originalText = insertTemplateBtn.textContent;
             const originalBgColor = insertTemplateBtn.style.backgroundColor;
+      const previousState = insertTemplateBtn.dataset.state || 'default';
 
             try {
                 const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -148,36 +282,38 @@ document.addEventListener('DOMContentLoaded', () => {
                             const isChromeUrl = injectError?.message?.includes('Cannot access a chrome:// URL');
                             showStatus(
                                 isChromeUrl
-                                    ? '⚠️ 無法在 chrome:// 分頁中使用，請切換到 JIRA 頁面後再試一次'
-                                    : (injectError?.message || '插入模板失敗'),
+                                    ? translate('status.insertChromeUrl')
+                                    : (injectError?.message || translate('status.insertFailed')),
                                 true
                             );
                             return;
                         }
                     } else {
-                        showStatus(messageError?.message || '插入模板失敗', true);
+                        showStatus(messageError?.message || translate('status.insertFailed'), true);
                         return;
                     }
                 }
 
                 if (result?.success) {
-                    insertTemplateBtn.textContent = '模板已插入！';
+                    insertTemplateBtn.dataset.state = 'success';
+                    insertTemplateBtn.textContent = translate('buttons.insertTemplateSuccess');
                     insertTemplateBtn.style.backgroundColor = '#28a745';
 
                     setTimeout(() => {
-                        insertTemplateBtn.textContent = '✨ 套用Bug Report模板';
+                        insertTemplateBtn.dataset.state = 'default';
+                        insertTemplateBtn.textContent = translate('buttons.insertTemplate');
                         insertTemplateBtn.style.backgroundColor = originalBgColor;
                     }, 3000);
                 } else {
-                    showStatus(result?.error || '插入模板失敗', true);
+                    showStatus(result?.error || translate('status.insertFailed'), true);
                     return;
                 }
             } catch (error) {
-                showStatus('❌ 錯誤：' + (error?.message || '未知錯誤'), true);
+                showStatus(translate('status.errorPrefix') + (error?.message || translate('status.unknownError')), true);
                 return;
             } finally {
                 insertTemplateBtn.disabled = false;
-                if (insertTemplateBtn.textContent === originalText) {
+        if ((insertTemplateBtn.dataset.state || 'default') === previousState) {
                     insertTemplateBtn.style.backgroundColor = originalBgColor;
                 }
             }

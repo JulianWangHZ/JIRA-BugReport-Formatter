@@ -1,13 +1,14 @@
-const DEFAULTS = {
-    JIRA_DOMAINS: [
-        '*.atlassian.net',
-        '*.jira.com',
-        '*/jira/*'
-    ],
-    BLACKLIST_DOMAINS: [
-        '*/wiki/*'
-    ],
-    DESCRIPTION_TEMPLATE: `<p><strong>🧾【描述】</strong></p>
+const SUPPORTED_LANGUAGES = ['zh-TW', 'en'];
+
+const DEFAULT_LANGUAGE = 'zh-TW';
+
+const LANGUAGE_LABELS = {
+    'zh-TW': '繁體中文',
+    en: 'English'
+};
+
+const DEFAULT_TEMPLATES = {
+    'zh-TW': `<p><strong>🧾【描述】</strong></p>
 <p>請簡要說明這張工單的背景與目的。</p>
 <p>&nbsp;</p>
 
@@ -39,11 +40,133 @@ const DEFAULTS = {
 <p>&nbsp;</p>
 
 <p><strong>🛩️【額外資訊】</strong></p>
-<p>補充任何對處理此問題有幫助的觀察或備註。</p>`
+<p>補充任何對處理此問題有幫助的觀察或備註。</p>`,
+    en: `<p><strong>🧾【Description】</strong></p>
+<p>Provide the context and purpose of this ticket.</p>
+<p>&nbsp;</p>
+
+<p><strong>⚠️【Current Issue】</strong></p>
+<p>Describe the problem or unexpected behavior you are seeing.</p>
+<p>&nbsp;</p>
+
+<p><strong>📎【Attachments】</strong></p>
+<p>List any related screenshots, recordings, or files here.</p>
+<p>&nbsp;</p>
+
+<p><strong>🥇【Preconditions】</strong></p>
+<p>Outline the conditions or settings required to reproduce the issue.</p>
+<p>&nbsp;</p>
+
+<p><strong>🧪【Reproduction Steps】</strong></p>
+<ol>
+<li>Step 1</li>
+<li>Step 2</li>
+</ol>
+<p>&nbsp;</p>
+
+<p><strong>✅【Expected Result】</strong></p>
+<p>Explain what should happen after the steps above.</p>
+<p>&nbsp;</p>
+
+<p><strong>🍀【Test Environment】</strong></p>
+<p>Production / Staging / Development</p>
+<p>&nbsp;</p>
+
+<p><strong>🛩️【Additional Information】</strong></p>
+<p>Share any extra notes or observations that might help resolve the issue.</p>`
+};
+
+const I18N = {
+    'zh-TW': {
+        appTitle: 'JIRA Bug Report Formatter',
+        tabQuick: '快速套用',
+        tabSettings: '設定',
+        buttons: {
+            insertTemplate: '✨ 套用 Bug Report 模板',
+            insertTemplateSuccess: '模板已插入！',
+            saveSettings: '儲存設定',
+            saveSettingsSuccess: '設定已儲存！'
+        },
+        labels: {
+            language: '介面語言',
+            jiraDomains: 'JIRA 網域（每行一個）：',
+            blacklistDomains: '封鎖網域（每行一個）：',
+            descriptionTemplate: '描述模板（HTML 格式）：'
+        },
+        placeholders: {
+            jiraDomains: '*.example.atlassian.net',
+            blacklistDomains: '*/wiki/*',
+            descriptionTemplate: '請輸入描述模板內容'
+        },
+        status: {
+            insertChromeUrl: '⚠️ 無法在 chrome:// 分頁中使用，請切換到 JIRA 頁面後再試一次',
+            insertFailed: '插入模板失敗',
+            saveMissingDomain: '⚠️ 請至少輸入一個 JIRA 網域',
+            saveMissingTemplate: '⚠️ 請輸入描述模板內容',
+            errorPrefix: '❌ 錯誤：',
+            unknownError: '未知錯誤'
+        },
+        toggle: {
+            zh: '繁中',
+            en: 'English'
+        }
+    },
+    en: {
+        appTitle: 'JIRA Bug Report Formatter',
+        tabQuick: 'Quick Apply',
+        tabSettings: 'Settings',
+        buttons: {
+            insertTemplate: '✨ Apply Bug Report Template',
+            insertTemplateSuccess: 'Template inserted!',
+            saveSettings: 'Save Settings',
+            saveSettingsSuccess: 'Settings saved!'
+        },
+        labels: {
+            language: 'Interface language',
+            jiraDomains: 'JIRA domains (one per line):',
+            blacklistDomains: 'Blocked domains (one per line):',
+            descriptionTemplate: 'Description template (HTML):'
+        },
+        placeholders: {
+            jiraDomains: '*.example.atlassian.net',
+            blacklistDomains: '*/wiki/*',
+            descriptionTemplate: 'Enter the description template'
+        },
+        status: {
+            insertChromeUrl: '⚠️ Cannot run on chrome:// pages. Please switch to a JIRA tab and try again.',
+            insertFailed: 'Failed to insert template',
+            saveMissingDomain: '⚠️ Please enter at least one JIRA domain',
+            saveMissingTemplate: '⚠️ Please provide template content',
+            errorPrefix: '❌ Error: ',
+            unknownError: 'Unknown error'
+        },
+        toggle: {
+            zh: '繁中',
+            en: 'English'
+        }
+    }
+};
+
+const DEFAULTS = {
+    JIRA_DOMAINS: [
+        '*.atlassian.net',
+        '*.jira.com',
+        '*/jira/*'
+    ],
+    BLACKLIST_DOMAINS: [
+        '*/wiki/*'
+    ],
+    LANGUAGE: DEFAULT_LANGUAGE,
+    DESCRIPTION_TEMPLATE: DEFAULT_TEMPLATES[DEFAULT_LANGUAGE]
 };
 
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-        DEFAULTS
+        DEFAULTS,
+        DEFAULT_TEMPLATES,
+        DEFAULT_LANGUAGE,
+        SUPPORTED_LANGUAGES,
+        LANGUAGE_LABELS,
+        I18N
     };
 }
