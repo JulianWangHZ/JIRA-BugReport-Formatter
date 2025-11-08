@@ -6,7 +6,7 @@ JIRA Bug Report Formatter 是一款 Chrome 擴充功能，協助團隊以一致�
 
 ## 示範影片
 
-- [產品導覽影片](https://github.com/user-attachments/assets/68f6e35e-d6c6-4567-bbcd-c9add8f2741d)
+[![產品導覽影片](https://github.com/user-attachments/assets/68f6e35e-d6c6-4567-bbcd-c9add8f2741d)](https://github.com/user-attachments/assets/68f6e35e-d6c6-4567-bbcd-c9add8f2741d)
 
 ## 功能亮點
 

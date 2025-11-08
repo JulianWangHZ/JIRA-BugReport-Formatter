@@ -6,7 +6,7 @@ Effortlessly produce structured JIRA bug reports with a single click. This Chrom
 
 ## Demo
 
-- [Product walkthrough video](https://github.com/user-attachments/assets/68f6e35e-d6c6-4567-bbcd-c9add8f2741d)
+[![Product walkthrough video](https://github.com/user-attachments/assets/68f6e35e-d6c6-4567-bbcd-c9add8f2741d)](https://github.com/user-attachments/assets/68f6e35e-d6c6-4567-bbcd-c9add8f2741d)
 
 ## Features
 
