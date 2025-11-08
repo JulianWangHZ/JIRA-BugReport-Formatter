@@ -204,16 +204,20 @@ select:focus {
 .header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
-  border-bottom: 2px solid #FF6FB1;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 16px;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .icon {
   width: 28px;
   height: 28px;
-  margin-right: 10px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -229,16 +233,7 @@ select:focus {
 .language-toggle {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  gap: 12px;
-}
-
-.language-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #555;
-  flex-shrink: 0;
+  justify-content: flex-end;
 }
 
 .language-switch {
