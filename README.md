@@ -2,6 +2,9 @@
 
 Effortlessly produce structured JIRA bug reports with a single click. This Chrome extension injects a customizable HTML template directly into the ticket description so teams can capture consistent details without repetitive copy-and-paste work.
 
+Revelent Link [Bug-Report-Formatter](https://chromewebstore.google.com/detail/jira-bug-report-formatter/mjfnjjkioaaebpdffhfdedlbbhnoinnec?authuser=0&hl=en&pli=1
+)
+
 > Looking for the Traditional Chinese guide? See [README.zh-TW.md](README.zh-TW.md).
 
 ## Demo
