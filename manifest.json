@@ -16,20 +16,20 @@
   "action": {
     "default_title": "JIRA Bug Report Formatter",
     "default_icon": {
-      "16": "growth.png",
-      "32": "growth.png",
-      "48": "growth.png",
-      "128": "growth.png"
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
     }
   },
   "side_panel": {
     "default_path": "sidepanel.html"
   },
   "icons": {
-    "16": "growth.png",
-    "32": "growth.png",
-    "48": "growth.png",
-    "128": "growth.png"
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "content_scripts": [
     {

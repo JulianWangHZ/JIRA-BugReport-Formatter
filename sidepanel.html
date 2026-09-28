@@ -10,7 +10,7 @@
   <div class="container">
     <div class="header">
       <div class="header-title">
-        <img src="growth.png" class="icon" alt="">
+        <img src="icons/logo.svg" class="icon" alt="">
         <h3 class="title" data-i18n="appTitle">JIRA Bug Report Formatter</h3>
       </div>
       <div class="language-toggle">
@@ -50,7 +50,10 @@
       </div>
 
       <div class="input-group">
-        <label for="descriptionTemplate" data-i18n="labels.descriptionTemplate">描述模板（HTML 格式）：</label>
+        <div class="label-row">
+          <label for="descriptionTemplate" data-i18n="labels.descriptionTemplate">描述模板（HTML 格式）：</label>
+          <button type="button" id="resetTemplateBtn" class="text-button" data-i18n="buttons.resetTemplate">還原預設</button>
+        </div>
         <textarea id="descriptionTemplate"
           data-i18n-placeholder="placeholders.descriptionTemplate"
           placeholder="請輸入描述模板內容"
