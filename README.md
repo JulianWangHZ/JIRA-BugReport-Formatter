@@ -64,7 +64,6 @@ All settings are stored in Chrome Sync Storage, so they follow you across device
   - `constants.js` – Default domains, templates, and UI strings
   - `icons/` – Logo (`logo.svg`) and toolbar icons
 - After making changes, reload the extension from `chrome://extensions/`.
-- Store assets: run `store-assets/build.sh` to re-render every Chrome Web Store image into `store-assets/upload/` (screenshots 1280×800, promo tiles 440×280 and 1400×560, store icon 128×128) using the system Chrome.
 
 ### Releases
 

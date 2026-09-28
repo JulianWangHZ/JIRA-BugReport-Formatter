@@ -64,7 +64,6 @@ JIRA Bug Report Formatter 是一款 Chrome 擴充功能，協助團隊以一致�
   - `constants.js`：預設網域、模板與介面文字
   - `icons/`：Logo（`logo.svg`）與工具列圖示
 - 修改後到 `chrome://extensions/` 重新載入擴充功能即可看到效果。
-- 商店素材：執行 `store-assets/build.sh`，會用系統 Chrome 重新產生所有 Chrome 商店圖片到 `store-assets/upload/`（截圖 1280×800、宣傳圖 440×280 與 1400×560、商店圖示 128×128）。
 
 ### 自動發版
 
