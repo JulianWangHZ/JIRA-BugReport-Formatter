@@ -78,6 +78,25 @@ async function insertTemplateManually() {
   }
 }
 
+const ALLOWED_TEMPLATE_TAGS = new Set(['P', 'STRONG', 'EM', 'B', 'I', 'OL', 'UL', 'LI', 'BR', 'SPAN', 'DIV']);
+
+function sanitizeTemplateHTML(html) {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_ELEMENT);
+  const disallowed = [];
+  let node = walker.nextNode();
+  while (node) {
+    if (!ALLOWED_TEMPLATE_TAGS.has(node.tagName)) {
+      disallowed.push(node);
+    } else {
+      Array.from(node.attributes).forEach(attr => node.removeAttribute(attr.name));
+    }
+    node = walker.nextNode();
+  }
+  disallowed.forEach(el => el.replaceWith(...el.childNodes));
+  return doc.body.innerHTML;
+}
+
 async function insertTemplateIntoField(template) {
   try {
     let descriptionField = null;
@@ -99,7 +118,7 @@ async function insertTemplateIntoField(template) {
       descriptionField.dispatchEvent(new Event('change', { bubbles: true }));
     } else if (descriptionField.contentEditable === 'true') {
       descriptionField.focus();
-      descriptionField.innerHTML = template;
+      descriptionField.innerHTML = sanitizeTemplateHTML(template);
       descriptionField.dispatchEvent(new Event('input', { bubbles: true }));
       descriptionField.dispatchEvent(new Event('change', { bubbles: true }));
       setTimeout(() => descriptionField.blur(), 100);
