@@ -53,3 +53,7 @@ Thumbs.db
 # Debug
 .debug/
 debug.log
+
+# Local store-asset tooling; only the exported images in store-assets/upload/ are tracked
+store-assets/*
+!store-assets/upload/

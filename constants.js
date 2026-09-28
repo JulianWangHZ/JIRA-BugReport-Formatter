@@ -8,20 +8,16 @@ const LANGUAGE_LABELS = {
 };
 
 const DEFAULT_TEMPLATES = {
-    'zh-TW': `<p><strong>🧾【描述】</strong></p>
-<p>請簡要說明這張工單的背景與目的。</p>
-<p>&nbsp;</p>
-
-<p><strong>⚠️【當前問題】</strong></p>
+    'zh-TW': `<p><strong>⚠️【當前問題】</strong></p>
 <p>描述目前遇到的問題或異常行為。</p>
 <p>&nbsp;</p>
 
-<p><strong>📎【附件檔案】</strong></p>
-<p>若有相關截圖、錄影或檔案，請在此列出。</p>
+<p><strong>🎯【影響範圍】</strong></p>
+<p>說明受影響的功能、頁面、使用者或平台。</p>
 <p>&nbsp;</p>
 
-<p><strong>🥇【前置條件】</strong></p>
-<p>列出重現問題前必須滿足的條件或設定。</p>
+<p><strong>📎【附件】</strong></p>
+<p>若有相關截圖、錄影或檔案，請在此列出。</p>
 <p>&nbsp;</p>
 
 <p><strong>🧪【重現測試步驟】</strong></p>
@@ -41,20 +37,16 @@ const DEFAULT_TEMPLATES = {
 
 <p><strong>🛩️【額外資訊】</strong></p>
 <p>補充任何對處理此問題有幫助的觀察或備註。</p>`,
-    en: `<p><strong>🧾【Description】</strong></p>
-<p>Provide the context and purpose of this ticket.</p>
+    en: `<p><strong>⚠️【Current Issue】</strong></p>
+<p>Describe the problem or unexpected behavior you are seeing.</p>
 <p>&nbsp;</p>
 
-<p><strong>⚠️【Current Issue】</strong></p>
-<p>Describe the problem or unexpected behavior you are seeing.</p>
+<p><strong>🎯【Impact Scope】</strong></p>
+<p>List the affected features, pages, users, or platforms.</p>
 <p>&nbsp;</p>
 
 <p><strong>📎【Attachments】</strong></p>
 <p>List any related screenshots, recordings, or files here.</p>
-<p>&nbsp;</p>
-
-<p><strong>🥇【Preconditions】</strong></p>
-<p>Outline the conditions or settings required to reproduce the issue.</p>
 <p>&nbsp;</p>
 
 <p><strong>🧪【Reproduction Steps】</strong></p>
@@ -82,10 +74,11 @@ const I18N = {
         tabQuick: '快速套用',
         tabSettings: '設定',
         buttons: {
-            insertTemplate: '✨ 套用 Bug Report 模板',
+            insertTemplate: '套用 Bug Report 模板',
             insertTemplateSuccess: '模板已插入！',
             saveSettings: '儲存設定',
-            saveSettingsSuccess: '設定已儲存！'
+            saveSettingsSuccess: '設定已儲存！',
+            resetTemplate: '還原預設'
         },
         labels: {
             language: '介面語言',
@@ -104,7 +97,8 @@ const I18N = {
             saveMissingDomain: '⚠️ 請至少輸入一個 JIRA 網域',
             saveMissingTemplate: '⚠️ 請輸入描述模板內容',
             errorPrefix: '❌ 錯誤：',
-            unknownError: '未知錯誤'
+            unknownError: '未知錯誤',
+            resetTemplateDone: '已還原為預設模板'
         },
         toggle: {
             zh: '繁中',
@@ -116,10 +110,11 @@ const I18N = {
         tabQuick: 'Quick Apply',
         tabSettings: 'Settings',
         buttons: {
-            insertTemplate: '✨ Apply Bug Report Template',
+            insertTemplate: 'Apply Bug Report Template',
             insertTemplateSuccess: 'Template inserted!',
             saveSettings: 'Save Settings',
-            saveSettingsSuccess: 'Settings saved!'
+            saveSettingsSuccess: 'Settings saved!',
+            resetTemplate: 'Restore default'
         },
         labels: {
             language: 'Interface language',
@@ -138,7 +133,8 @@ const I18N = {
             saveMissingDomain: '⚠️ Please enter at least one JIRA domain',
             saveMissingTemplate: '⚠️ Please provide template content',
             errorPrefix: '❌ Error: ',
-            unknownError: 'Unknown error'
+            unknownError: 'Unknown error',
+            resetTemplateDone: 'Template restored to default'
         },
         toggle: {
             zh: '繁中',

@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const blacklistDomainsInput = document.getElementById('blacklistDomains');
   const descriptionTemplateInput = document.getElementById('descriptionTemplate');
   const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+  const resetTemplateBtn = document.getElementById('resetTemplateBtn');
   const insertTemplateBtn = document.getElementById('insertTemplateBtn');
   const status = document.getElementById('status');
   const settingsStatus = document.getElementById('settings-status');
@@ -191,6 +192,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  if (resetTemplateBtn) {
+    resetTemplateBtn.addEventListener('click', () => {
+      const defaultTemplate = (DEFAULT_TEMPLATES && DEFAULT_TEMPLATES[currentLanguage]) || DEFAULTS.DESCRIPTION_TEMPLATE;
+      const updatedTemplates = {
+        ...descriptionTemplates,
+        [currentLanguage]: defaultTemplate
+      };
+
+      chrome.storage.sync.set({
+        descriptionTemplates: updatedTemplates,
+        descriptionTemplate: defaultTemplate
+      }, () => {
+        if (chrome.runtime.lastError) {
+          showStatus(translate('status.errorPrefix') + chrome.runtime.lastError.message, true, settingsStatus);
+          return;
+        }
+        descriptionTemplates = updatedTemplates;
+        if (descriptionTemplateInput) {
+          descriptionTemplateInput.value = defaultTemplate;
+        }
+        showStatus(translate('status.resetTemplateDone'), false, settingsStatus);
+      });
+    });
+  }
+
     if (saveSettingsBtn) {
         saveSettingsBtn.addEventListener('click', () => {
       captureCurrentTemplate();
@@ -237,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 saveSettingsBtn.dataset.state = 'success';
                 saveSettingsBtn.textContent = translate('buttons.saveSettingsSuccess');
-      saveSettingsBtn.style.backgroundColor = '#28a745';
+      saveSettingsBtn.style.backgroundColor = '#3a9468';
       saveSettingsBtn.disabled = true;
 
       setTimeout(() => {
@@ -297,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (result?.success) {
                     insertTemplateBtn.dataset.state = 'success';
                     insertTemplateBtn.textContent = translate('buttons.insertTemplateSuccess');
-                    insertTemplateBtn.style.backgroundColor = '#28a745';
+                    insertTemplateBtn.style.backgroundColor = '#3a9468';
 
                     setTimeout(() => {
                         insertTemplateBtn.dataset.state = 'default';

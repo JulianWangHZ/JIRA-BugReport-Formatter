@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    # Docs / store-asset only changes don't need a new extension version
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+      - 'store-assets/**'
+      - '.github/**'
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    # Skip the commit this workflow pushes itself
+    if: ${{ !startsWith(github.event.head_commit.message, 'chore(release):') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Bump version in manifest.json
+        id: bump
+        run: node .github/scripts/bump-version.mjs
+
+      - name: Commit and tag
+        env:
+          VERSION: ${{ steps.bump.outputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add manifest.json
+          git commit -m "chore(release): v${VERSION} [skip ci]"
+          git tag "v${VERSION}"
+          git push origin HEAD:main
+          git push origin "v${VERSION}"
+
+      - name: Package extension
+        id: pack
+        env:
+          VERSION: ${{ steps.bump.outputs.version }}
+        run: echo "zip=$(.github/scripts/package.sh "$VERSION")" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.bump.outputs.version }}
+        run: |
+          gh release create "v${VERSION}" "${{ steps.pack.outputs.zip }}" \
+            --title "v${VERSION}" \
+            --generate-notes
