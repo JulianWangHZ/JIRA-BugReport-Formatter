@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+  <div class="top">
+    <img src="../icons/logo.svg" alt="">
+    <h1 data-t="h1">A clean <em>bug report</em> in one click</h1>
+  </div>
+  <p class="sub" data-t="sub">Drop a structured template into any Jira description — your team, your format.</p>
+
+  <div class="window">
+    <div class="tabstrip">
+      <div class="lights"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+      <div class="tab"><span class="jlogo"><i style="width:14px;height:14px;border-radius:3px"></i></span><span data-t="tab">Board - Web App - Jira</span><span class="x">×</span></div>
+      <span class="newtab">+</span>
+    </div>
+
+    <div class="toolbar">
+      <span class="tb-icon"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>
+      <span class="tb-icon"><svg viewBox="0 0 24 24" style="opacity:.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <span class="tb-icon"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg></span>
+      <div class="omnibox">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#5f6368" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M4 17h6M18 7h2M14 17h6"/><circle cx="16" cy="7" r="2"/><circle cx="12" cy="17" r="2"/></svg>
+        <span><b>acme.atlassian.net</b>/jira/software/projects/WEB/boards/1</span>
+      </div>
+      <span class="tb-icon"><svg viewBox="0 0 24 24"><path d="M10 3h4v3a2 2 0 1 0 4 0V3h3v6h-3a2 2 0 1 0 0 4h3v8h-8v-3a2 2 0 1 0-4 0v3H3v-8h3a2 2 0 1 0 0-4H3V3z"/></svg></span>
+      <span class="tb-icon ext-active"><img src="../icons/logo.svg" alt=""></span>
+      <span class="avatar">JW</span>
+      <span class="tb-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
+    </div>
+
+    <div class="viewport">
+      <div class="page">
+        <div class="jnav">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="#44546f"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/><rect x="17" y="10" width="4" height="5" rx="1"/></svg>
+          <span class="jlogo"><i></i>Jira</span>
+          <div class="jsearch" data-t="search">Search</div>
+          <span class="jcreate" data-t="create">+ Create</span>
+        </div>
+        <div class="jbody">
+          <div class="jside">
+            <div class="proj"><i></i>Web App</div>
+            <div data-t="nav1">Summary</div><div data-t="nav2">Timeline</div><div class="sel" data-t="nav3">Board</div><div data-t="nav4">List</div><div data-t="nav5">Calendar</div><div data-t="nav6">Reports</div>
+          </div>
+          <div class="jmain">
+            <h2 data-t="board">WEB board</h2>
+            <div class="cols">
+              <div class="col"><p data-t="col1">TO DO</p><div class="card"></div><div class="card"></div><div class="card"></div></div>
+              <div class="col"><p data-t="col2">IN PROGRESS</p><div class="card"></div><div class="card"></div></div>
+              <div class="col"><p data-t="col3">DONE</p><div class="card"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="blanket"></div>
+
+        <div class="modal">
+          <div class="mhead"><h3 data-t="mtitle">Create</h3><div class="acts"><span>—</span><span>⤢</span><span>✕</span></div></div>
+          <div class="mreq" data-t="mreq">Required fields are marked with an asterisk <span>*</span></div>
+          <div class="mbody">
+            <div class="row">
+              <div><div class="lab" data-t="space">Space <span>*</span></div><div class="fld"><i class="ico-proj"></i>Web App (WEB)<span class="chev">▼</span></div></div>
+              <div><div class="lab" data-t="wtype">Work type <span>*</span></div><div class="fld"><i class="ico-bug"></i><span data-t="bug">Bug</span><span class="chev">▼</span></div></div>
+            </div>
+            <div class="lab" data-t="summaryLab">Summary <span>*</span></div>
+            <div class="fld" data-t="summary">Checkout button does nothing on Safari 17</div>
+            <div class="lab" data-t="desc">Description</div>
+            <div class="editor">
+              <div class="etool">
+                <span>Tt ▾</span><span class="sep"></span><span><b>B</b></span><span><i>I</i></span><span>•••</span><span class="sep"></span>
+                <span>☰</span><span>⋮☰</span><span class="sep"></span><span>🔗</span><span>@</span><span>☺</span><span>▦</span><span>+ ▾</span>
+              </div>
+              <div class="econtent" data-t="template">
+                <p><strong>⚠️【Current Issue】</strong></p>
+                <p>Describe the problem or unexpected behavior you are seeing.</p>
+                <div class="gap"></div>
+                <p><strong>🎯【Impact Scope】</strong></p>
+                <p>List the affected features, pages, users, or platforms.</p>
+                <div class="gap"></div>
+                <p><strong>📎【Attachments】</strong></p>
+                <p>List any related screenshots, recordings, or files here.</p>
+                <div class="gap"></div>
+                <p><strong>🧪【Reproduction Steps】</strong></p>
+                <ol><li>Step 1</li><li>Step 2</li></ol>
+              </div>
+            </div>
+          </div>
+          <div class="mfoot">
+            <span class="another"><i class="cb"></i><span data-t="another">Create another</span></span>
+            <span class="btn-sub" data-t="cancel">Cancel</span><span class="btn-pri" data-t="mcreate">Create</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="sidepanel">
+        <div class="sp-head">
+          <img src="../icons/logo.svg" alt="">
+          <span class="name">JIRA Bug Report Formatter</span><span class="caret">▼</span>
+          <span class="right">
+            <span class="tb-icon"><svg viewBox="0 0 24 24"><path d="M9 3h6l-1 6 4 4H6l4-4zM12 13v8"/></svg></span>
+            <span class="tb-icon"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+          </span>
+        </div>
+        <div class="sp-body">
+          <img id="panelShot" src="_build/panel-en-quick.png" alt="">
+          <svg class="cursor" viewBox="0 0 24 24"><path d="M4 2l16 11-7 1.5L9.5 21z" fill="#1f1f1f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="callout"><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span data-t="callout">7 sections inserted</span></div>
+  <script>
+    // Render with ?lang=zh for the Traditional Chinese screenshot
+    const ZH = {
+      h1: '一鍵產生<em>乾淨</em>的 Bug Report',
+      sub: '在任何 Jira 描述欄套用結構化模板——你們團隊，你們的格式。',
+      tab: '看板 - Web App - Jira', search: '搜尋', create: '+ 建立',
+      nav1: '摘要', nav2: '時間表', nav3: '看板', nav4: '清單', nav5: '行事曆', nav6: '報告',
+      board: 'WEB 看板', col1: '待辦', col2: '進行中', col3: '完成',
+      mtitle: '建立', mreq: '必填欄位皆標有星號 <span>*</span>',
+      space: '空間 <span>*</span>', wtype: '工作類型 <span>*</span>', bug: '錯誤',
+      summaryLab: '摘要 <span>*</span>', summary: 'Safari 17 點擊結帳按鈕沒有反應', desc: '描述',
+      template: `<p><strong>⚠️【當前問題】</strong></p><p>描述目前遇到的問題或異常行為。</p><div class="gap"></div>
+        <p><strong>🎯【影響範圍】</strong></p><p>說明受影響的功能、頁面、使用者或平台。</p><div class="gap"></div>
+        <p><strong>📎【附件】</strong></p><p>若有相關截圖、錄影或檔案，請在此列出。</p><div class="gap"></div>
+        <p><strong>🧪【重現測試步驟】</strong></p><ol><li>步驟 1</li><li>步驟 2</li></ol>`,
+      another: '建立另一個', cancel: '取消', mcreate: '建立', callout: '已插入 7 個段落'
+    };
+    if (new URLSearchParams(location.search).get('lang') === 'zh') {
+      document.documentElement.lang = 'zh-TW';
+      document.querySelectorAll('[data-t]').forEach((el) => {
+        if (ZH[el.dataset.t]) el.innerHTML = ZH[el.dataset.t];
+      });
+      document.getElementById('panelShot').src = '_build/panel-zh-quick.png';
+    }
+  </script>
+</body>
+</html>

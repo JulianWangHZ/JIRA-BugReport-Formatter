@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  .issue {
+    position: absolute; left: 48px; top: 200px; width: 700px; height: 640px; background: #fff; border-radius: 14px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5); padding: 24px 32px; color: var(--ads-text); overflow: hidden;
+  }
+  .crumb { font-size: 13px; color: var(--ads-subtle); display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .crumb .ico-bug { width: 14px; height: 14px; }
+  .issue h2 { margin: 0 0 18px; font-size: 24px; font-weight: 600; }
+  .issue .lab { font-size: 15px; color: var(--ads-text); margin: 0 0 10px; }
+  .desc { font-size: 14px; line-height: 1.55; }
+  .desc p { margin: 0; }
+  .desc ol { margin: 0; padding-left: 22px; }
+  .desc .gap { height: 10px; }
+  .desc .file { display: inline-flex; gap: 6px; align-items: center; border: 1px solid #dcdfe4; border-radius: 4px; padding: 2px 8px; font-size: 13px; margin-right: 6px; }
+  .list { position: absolute; left: 792px; top: 206px; width: 440px; font-family: Inter, sans-serif; }
+  .item { display: flex; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .item em { font-style: normal; color: var(--brand-soft); font-size: 14px; font-weight: 500; width: 22px; }
+  .item b { color: #fff; font-size: 18px; font-weight: 500; }
+  .item span { display: block; color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 3px; }
+</style>
+</head>
+<body>
+  <div class="top">
+    <img src="../icons/logo.svg" alt="">
+    <h1><em>7 sections</em> every bug report needs</h1>
+  </div>
+  <p class="sub">Developers get the full picture on the first read — no follow-up questions.</p>
+
+  <div class="issue">
+    <div class="crumb"><i class="ico-proj" style="width:14px;height:14px;border-radius:3px;background:#22a06b"></i>Web App / <i class="ico-bug"></i>WEB-128</div>
+    <h2>Checkout button does nothing on Safari 17</h2>
+    <div class="lab"><b>Description</b></div>
+    <div class="desc">
+      <p><strong>⚠️【Current Issue】</strong></p>
+      <p>Tapping “Checkout” on the cart page has no effect — no navigation, no error.</p><div class="gap"></div>
+      <p><strong>🎯【Impact Scope】</strong></p>
+      <p>All Safari 17 users (iOS &amp; macOS) · checkout page · ~18% of orders.</p><div class="gap"></div>
+      <p><strong>📎【Attachments】</strong></p>
+      <p><span class="file">🎬 checkout-safari.mov</span><span class="file">📄 console.log</span></p><div class="gap"></div>
+      <p><strong>🧪【Reproduction Steps】</strong></p>
+      <ol><li>Open the site in Safari 17 and add any item to the cart</li><li>Go to the cart page and tap “Checkout”</li></ol><div class="gap"></div>
+      <p><strong>✅【Expected Result】</strong></p>
+      <p>User is taken to the payment step.</p><div class="gap"></div>
+      <p><strong>🍀【Test Environment】</strong></p>
+      <p>Staging · Safari 17.4 · macOS 14.4 / iOS 17.4</p><div class="gap"></div>
+      <p><strong>🛩️【Additional Information】</strong></p>
+      <p>Works in Chrome and Firefox. Started after release 2.8.0.</p>
+    </div>
+  </div>
+
+  <div class="list">
+    <div class="item"><em>01</em><div><b>Current Issue</b><span>What's broken, in one line</span></div></div>
+    <div class="item"><em>02</em><div><b>Impact Scope</b><span>Who and what is affected</span></div></div>
+    <div class="item"><em>03</em><div><b>Attachments</b><span>Screenshots, recordings, logs</span></div></div>
+    <div class="item"><em>04</em><div><b>Reproduction Steps</b><span>So anyone can see it happen</span></div></div>
+    <div class="item"><em>05</em><div><b>Expected Result</b><span>What should happen instead</span></div></div>
+    <div class="item"><em>06</em><div><b>Test Environment</b><span>Where it was found</span></div></div>
+    <div class="item"><em>07</em><div><b>Additional Information</b><span>Anything else that helps</span></div></div>
+  </div>
+</body>
+</html>

@@ -2,65 +2,86 @@
 
 Effortlessly produce structured JIRA bug reports with a single click. This Chrome extension injects a customizable HTML template directly into the ticket description so teams can capture consistent details without repetitive copy-and-paste work.
 
-Revelent Link 😊: [Bug-Report-Formatter](https://chromewebstore.google.com/detail/jira-bug-report-formatter/mjfnjjkioaaebpdfhfdedlbbhnoinnec?authuser=0&hl=en&pli=1)
-
+Relevant Link 😊: [Bug-Report-Formatter](https://chromewebstore.google.com/detail/jira-bug-report-formatter/mjfnjjkioaaebpdfhfdedlbbhnoinnec?authuser=0&hl=en&pli=1)
 
 > Looking for the Traditional Chinese guide? See [README.zh-TW.md](README.zh-TW.md).
 
-## Demo
-
-[![Product walkthrough video](https://github.com/user-attachments/assets/68f6e35e-d6c6-4567-bbcd-c9add8f2741d)](https://github.com/user-attachments/assets/68f6e35e-d6c6-4567-bbcd-c9add8f2741d)
+![JIRA Bug Report Formatter — a clean bug report in one click](store-assets/upload/screenshot-1-hero-en.png)
 
 ## Features
 
-- **One-click template injection** – Populate the JIRA description field with a curated bug report template right from the side panel.
-- **Fully customizable content** – Edit the HTML template in the extension settings to match your team’s workflow and formatting rules.
-- **Domain whitelisting / blacklisting** – Control exactly which JIRA domains should load the side panel and which URLs should be ignored.
-- **Localized UI** – All prompts and status messages are available in Traditional Chinese to reduce friction for multilingual teams.
-- **Minimal permissions** – Uses only `storage`, `tabs`, and `scripting`, keeping all data processing inside the browser.
+- **One-click template injection** – Populate the JIRA description field with a structured bug report template right from the side panel.
+- **Focused default template** – Seven sections: Current Issue, Impact Scope, Attachments, Reproduction Steps, Expected Result, Test Environment, Additional Information.
+- **Fully customizable content** – Edit the HTML template in Settings; one click on **Restore default** brings back the built-in version.
+- **Domain whitelisting / blacklisting** – Control exactly which JIRA domains the extension works on and which URLs are ignored.
+- **Bilingual UI** – Switch between Traditional Chinese and English; each language keeps its own template.
+- **Minimal permissions** – Uses only `storage`, `sidePanel`, and `scripting`; all data stays in the browser.
 
 ## Installation
 
-1. Clone or download this repository:
+**From the Chrome Web Store (recommended):** install via the [store listing](https://chromewebstore.google.com/detail/jira-bug-report-formatter/mjfnjjkioaaebpdfhfdedlbbhnoinnec).
+
+**From source:**
+
+1. Clone this repository:
    ```bash
-   git clone https://github.com/your-account/jira-bug-report-formatter.git
+   git clone https://github.com/JulianWangHZ/JIRA-BugReport-Formatter.git
    ```
+   Or download the zip from the latest [GitHub Release](https://github.com/JulianWangHZ/JIRA-BugReport-Formatter/releases/latest) and unzip it.
 2. Open `chrome://extensions/` in Chrome.
 3. Enable **Developer mode** in the top-right corner.
-4. Click **Load unpacked** and select the project root directory.
+4. Click **Load unpacked** and select the project (or unzipped) folder.
 5. The “JIRA Bug Report Formatter” icon will appear in your toolbar.
 
 ## Usage
 
 1. Navigate to any JIRA ticket creation or edit page.
 2. Open the extension side panel from the Chrome toolbar.
-3. In the **Quick Apply** tab, click **“✨ Apply Bug Report Template”**.
-4. The description field will be populated with the configured HTML snippet; adjust any details and save the ticket.
+3. In the **Quick Apply** tab, click **Apply Bug Report Template**.
+4. The description field is filled with the template; fill in the details and create the ticket.
 
 ## Configuration
 
-Switch to the **Settings** tab in the side panel to customize behaviour:
+Switch to the **Settings** tab in the side panel:
 
-- **JIRA Domains** – Whitelist domains where the side panel should appear (one per line). Defaults include `*.atlassian.net`, `*.jira.com`, and `*/jira/*`.
-- **Blocked Domains** – Exclude pages that should never receive the template, e.g. `*/wiki/*` for Confluence URLs.
-- **Description Template** – Edit the HTML content directly; new changes take effect the next time the template is applied. Include spacing or extra sections as needed.
+- **JIRA Domains** – Domains where the extension is active (one per line). Defaults: `*.atlassian.net`, `*.jira.com`, `*/jira/*`.
+- **Blocked Domains** – Pages that should never receive the template, e.g. `*/wiki/*` for Confluence.
+- **Description Template** – Edit the HTML directly and click **Save Settings**. Click **Restore default** to reset the current language's template instantly.
 
-All settings are stored in Chrome Sync Storage so they remain consistent across devices signed into the same account.
+All settings are stored in Chrome Sync Storage, so they follow you across devices signed into the same account.
 
 ## Troubleshooting
 
-- **“⚠️ Unable to use on chrome:// pages”** – Chrome prevents extensions from injecting scripts on internal pages. Switch to a regular JIRA tab and try again.
-- **Template does not appear** – Ensure the description field is empty, the current URL is not blocked, and the page has finished loading.
-- **Need a different language** – Customize the HTML template with content in your preferred language before applying it.
+- **“⚠️ Cannot run on chrome:// pages”** – Chrome blocks extensions on internal pages. Switch to a regular JIRA tab and try again.
+- **Template does not appear** – Make sure the description field is empty, the URL is not blocked, and the page has finished loading.
+- **Still seeing an old template after an update** – A previously saved template takes priority over the new default. Open **Settings** and click **Restore default**.
 
-## Development Notes
+## Development
 
 - Core files:
-  - `sidepanel.html` / `sidepanel.js` – Side panel UI and logic
+  - `sidepanel.html` / `sidepanel.css` / `sidepanel.js` – Side panel UI and logic
   - `content.js` – Template injection inside the JIRA page
-  - `constants.js` – Default domains and template values
-- After making changes, reload the extension from `chrome://extensions/` to see updates.
-- Optional: run linting checks (`read_lints`) to keep the codebase tidy.
+  - `constants.js` – Default domains, templates, and UI strings
+  - `icons/` – Logo (`logo.svg`) and toolbar icons
+- After making changes, reload the extension from `chrome://extensions/`.
+- Store assets: run `store-assets/build.sh` to re-render every Chrome Web Store image into `store-assets/upload/` (screenshots 1280×800, promo tiles 440×280 and 1400×560, store icon 128×128) using the system Chrome.
+
+### Releases
+
+Releases are automated with GitHub Actions:
+
+- **Pull requests** (`.github/workflows/pr-check.yml`) – validate `manifest.json`, syntax-check scripts, and preview the next version in the job summary.
+- **Merge to `main`** (`.github/workflows/release.yml`) – bump `manifest.json`, tag `vX.Y.Z`, and publish a GitHub Release with the packaged zip.
+
+The version bump follows [Conventional Commits](https://www.conventionalcommits.org/) since the last tag:
+
+| Commit / PR title | Bump |
+|---|---|
+| `feat!: ...` or `BREAKING CHANGE:` | major |
+| `feat: ...` | minor |
+| anything else (`fix:`, `refactor:`, ...) | patch |
+
+Changes that only touch docs, `store-assets/`, or `.github/` don't trigger a release. Uploading to the Chrome Web Store is still manual — use the zip attached to the release.
 
 ## License
 
