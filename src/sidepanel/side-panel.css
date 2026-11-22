@@ -358,14 +358,14 @@ select:focus {
 }
 
 /* Insert button icon: line-style glyph via mask so it inherits text color */
-#insertTemplateBtn {
+#apply-template-button {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
 
-#insertTemplateBtn::before {
+#apply-template-button::before {
   content: "";
   width: 16px;
   height: 16px;
@@ -375,7 +375,7 @@ select:focus {
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 3v5h5'/%3E%3Cpath d='M12 11v6M9 14h6'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
-#insertTemplateBtn[data-state="success"]::before {
+#apply-template-button[data-state="success"]::before {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");
 }
@@ -415,4 +415,41 @@ select:focus {
 .text-button:focus-visible {
   outline: 2px solid var(--color-ink-roast);
   outline-offset: 2px;
+}
+
+/* Success flash shared by the apply and save buttons */
+.button[data-state="success"],
+.button[data-state="success"]:disabled {
+  background: var(--color-sage-green);
+}
+
+/* Settings has one field: let the template editor fill the panel height
+   and keep Save pinned below it. */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-content--fill.active {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group--fill {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group--fill textarea {
+  flex: 1;
+  min-height: 240px;
+  resize: none;
 }

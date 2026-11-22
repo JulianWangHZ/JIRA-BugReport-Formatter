@@ -17,13 +17,23 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Validate manifest.json
         run: node -e "JSON.parse(require('fs').readFileSync('manifest.json', 'utf8'))"
 
-      - name: Syntax-check scripts
-        run: for f in *.js; do node --check "$f"; done
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test with coverage
+        run: npm run test:coverage
+
+      - name: Build
+        run: npm run build
 
       - name: Check package contents
         run: .github/scripts/package.sh check
