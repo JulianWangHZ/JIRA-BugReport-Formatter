@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="side-panel.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-title">
+        <img src="../icons/logo.svg" class="icon" alt="">
+        <h3 class="title" data-i18n="appTitle">JIRA Bug Report Formatter</h3>
+      </div>
+      <div class="language-toggle">
+        <label class="language-switch">
+          <input type="checkbox" id="language-toggle" data-i18n-aria-label="labels.language" aria-label="language toggle">
+          <span class="slider">
+            <span class="slider-label slider-label-zh" data-i18n="toggle.zh">繁中</span>
+            <span class="slider-label slider-label-en" data-i18n="toggle.en">English</span>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <div class="tab-navigation">
+      <button class="tab-button active" data-tab="quick" data-i18n="tabQuick">快速套用</button>
+      <button class="tab-button" data-tab="settings" data-i18n="tabSettings">設定</button>
+    </div>
+
+    <div id="quick-tab" class="tab-content active">
+      <div id="apply-status" class="status"></div>
+
+      <button id="apply-template-button" class="button" data-state="default"
+        data-i18n="buttons.insertTemplate"
+        data-i18n-success="buttons.insertTemplateSuccess">套用模板</button>
+    </div>
+
+    <div id="settings-tab" class="tab-content tab-content--fill">
+      <div class="input-group input-group--fill">
+        <div class="label-row">
+          <label for="template-input" data-i18n="labels.descriptionTemplate">描述模板（HTML 格式）：</label>
+          <button type="button" id="reset-template-button" class="text-button" data-i18n="buttons.resetTemplate">還原預設</button>
+        </div>
+        <textarea id="template-input"
+          data-i18n-placeholder="placeholders.descriptionTemplate"
+          placeholder="請輸入描述模板內容"
+          rows="10"></textarea>
+      </div>
+
+      <div id="settings-status" class="status"></div>
+
+      <button id="save-settings-button" class="button" data-state="default"
+        data-i18n="buttons.saveSettings"
+        data-i18n-success="buttons.saveSettingsSuccess">儲存設定</button>
+    </div>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+
+</html>

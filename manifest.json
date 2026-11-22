@@ -9,9 +9,7 @@
     "scripting"
   ],
   "host_permissions": [
-    "*://*.atlassian.net/*",
-    "*://*.jira.com/*",
-    "*://*/jira/*"
+    "*://*/*"
   ],
   "action": {
     "default_title": "JIRA Bug Report Formatter",
@@ -23,7 +21,7 @@
     }
   },
   "side_panel": {
-    "default_path": "sidepanel.html"
+    "default_path": "sidepanel/side-panel.html"
   },
   "icons": {
     "16": "icons/icon16.png",
@@ -31,19 +29,8 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "*://*/*"
-      ],
-      "js": [
-        "constants.js",
-        "content.js"
-      ],
-      "run_at": "document_end"
-    }
-  ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background/service-worker.js",
+    "type": "module"
   }
 }

@@ -29,7 +29,14 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test
+        run: npm test
 
       - name: Bump version in manifest.json
         id: bump
@@ -46,6 +53,9 @@ jobs:
           git tag "v${VERSION}"
           git push origin HEAD:main
           git push origin "v${VERSION}"
+
+      - name: Build extension
+        run: npm run build
 
       - name: Package extension
         id: pack
